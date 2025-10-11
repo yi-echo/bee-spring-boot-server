@@ -56,11 +56,11 @@ public class ApiResponse<T> {
     
     // 成功响应
     public static <T> ApiResponse<T> success() {
-        return new ApiResponse<>(200, "操作成功");
+        return new ApiResponse<>(200, "ok");
     }
     
     public static <T> ApiResponse<T> success(T data) {
-        return new ApiResponse<>(200, "操作成功", data);
+        return new ApiResponse<>(200, "ok", data);
     }
     
     public static <T> ApiResponse<T> success(String message, T data) {

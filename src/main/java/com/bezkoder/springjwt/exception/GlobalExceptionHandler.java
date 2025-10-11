@@ -34,7 +34,7 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(BusinessException.class)
     public ResponseEntity<ApiResponse<Object>> handleBusinessException(BusinessException e) {
-        logger.warn("业务异常: {}", e.getMessage());
+        logger.warn("business exception: {}", e.getMessage());
         return ResponseUtil.error(e.getCode(), e.getMessage());
     }
     
@@ -50,8 +50,8 @@ public class GlobalExceptionHandler {
             String errorMessage = error.getDefaultMessage();
             errors.put(fieldName, errorMessage);
         });
-        logger.warn("参数校验失败: {}", errors);
-        return ResponseUtil.badRequest("参数校验失败");
+        logger.warn("pramas validation failed: {}", errors);
+        return ResponseUtil.error(400, "pramas validation failed", errors);
     }
     
     /**
@@ -65,8 +65,8 @@ public class GlobalExceptionHandler {
             String errorMessage = error.getDefaultMessage();
             errors.put(fieldName, errorMessage);
         });
-        logger.warn("参数绑定失败: {}", errors);
-        return ResponseUtil.badRequest("参数绑定失败");
+        logger.warn("pramas binding failed: {}", errors);
+        return ResponseUtil.error(400, "pramas binding failed", errors);
     }
     
     /**
@@ -82,8 +82,8 @@ public class GlobalExceptionHandler {
             String errorMessage = violation.getMessage();
             errors.put(fieldName, errorMessage);
         }
-        logger.warn("约束违反: {}", errors);
-        return ResponseUtil.badRequest("参数校验失败");
+        logger.warn("pramas validation failed: {}", errors);
+        return ResponseUtil.error(400, "pramas validation failed", errors);
     }
     
     /**
@@ -94,8 +94,8 @@ public class GlobalExceptionHandler {
         String typeName = ex.getRequiredType() != null ? ex.getRequiredType().getSimpleName() : "未知类型";
         String message = String.format("参数 '%s' 的值 '%s' 无法转换为 '%s' 类型", 
                 ex.getName(), ex.getValue(), typeName);
-        logger.warn("参数类型不匹配: {}", message);
-        return ResponseUtil.badRequest(message);
+        logger.warn("pramas type mismatch: {}", message);
+        return ResponseUtil.error(400, "pramas type mismatch", message);
     }
     
     /**
@@ -103,8 +103,8 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(AuthenticationException.class)
     public ResponseEntity<ApiResponse<Object>> handleAuthenticationException(AuthenticationException e) {
-        logger.warn("认证失败: {}", e.getMessage());
-        return ResponseUtil.unauthorized("认证失败，请检查用户名和密码");
+        logger.warn("authentication failed: {}", e.getMessage());
+        return ResponseUtil.unauthorized("authentication failed, please check username and password");
     }
     
     /**
@@ -112,8 +112,8 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(BadCredentialsException.class)
     public ResponseEntity<ApiResponse<Object>> handleBadCredentialsException(BadCredentialsException e) {
-        logger.warn("凭据错误: {}", e.getMessage());
-        return ResponseUtil.unauthorized("用户名或密码错误");
+        logger.warn("username or password error: {}", e.getMessage());
+        return ResponseUtil.unauthorized("username or password error");
     }
     
     /**
@@ -121,8 +121,8 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(AccessDeniedException.class)
     public ResponseEntity<ApiResponse<Object>> handleAccessDeniedException(AccessDeniedException e) {
-        logger.warn("访问被拒绝: {}", e.getMessage());
-        return ResponseUtil.forbidden("没有权限访问该资源");
+        logger.warn("no permission to access this resource: {}", e.getMessage());
+        return ResponseUtil.forbidden("no permission to access this resource");
     }
     
     /**
@@ -130,8 +130,8 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity<ApiResponse<Object>> handleIllegalArgumentException(IllegalArgumentException e) {
-        logger.warn("非法参数: {}", e.getMessage());
-        return ResponseUtil.badRequest(e.getMessage());
+        logger.warn("illegal parameter: {}", e.getMessage());
+        return ResponseUtil.error(400, "illegal parameter", e.getMessage());
     }
     
     /**
@@ -139,8 +139,8 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(NullPointerException.class)
     public ResponseEntity<ApiResponse<Object>> handleNullPointerException(NullPointerException e) {
-        logger.error("空指针异常", e);
-        return ResponseUtil.internalServerError("系统内部错误");
+        logger.error("system internal error", e);
+        return ResponseUtil.internalServerError("system internal error");
     }
     
     /**
@@ -148,8 +148,8 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(RuntimeException.class)
     public ResponseEntity<ApiResponse<Object>> handleRuntimeException(RuntimeException e) {
-        logger.error("运行时异常", e);
-        return ResponseUtil.internalServerError("系统运行异常");
+        logger.error("system runtime error", e);
+        return ResponseUtil.internalServerError("system runtime error");
     }
     
     /**
@@ -157,7 +157,7 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ApiResponse<Object>> handleGenericException(Exception e) {
-        logger.error("未知异常", e);
-        return ResponseUtil.internalServerError("系统内部错误");
+        logger.error("system internal error", e);
+        return ResponseUtil.internalServerError("system internal error");
     }
 }

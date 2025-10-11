@@ -25,6 +25,7 @@ import com.bezkoder.springjwt.models.Role;
 import com.bezkoder.springjwt.models.User;
 import com.bezkoder.springjwt.payload.request.LoginRequest;
 import com.bezkoder.springjwt.payload.request.SignupRequest;
+import com.bezkoder.springjwt.payload.request.TokenRefreshRequest;
 import com.bezkoder.springjwt.payload.response.JwtResponse;
 import com.bezkoder.springjwt.payload.response.ApiResponse;
 import com.bezkoder.springjwt.util.ResponseUtil;
@@ -32,6 +33,8 @@ import com.bezkoder.springjwt.repository.RoleRepository;
 import com.bezkoder.springjwt.repository.UserRepository;
 import com.bezkoder.springjwt.security.jwt.JwtUtils;
 import com.bezkoder.springjwt.security.services.UserDetailsImpl;
+import com.bezkoder.springjwt.security.services.RefreshTokenService;
+import com.bezkoder.springjwt.models.RefreshToken;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -52,6 +55,9 @@ public class AuthController {
   @Autowired
   JwtUtils jwtUtils;
 
+  @Autowired
+  RefreshTokenService refreshTokenService;
+
   @PostMapping("/signin")
   public ResponseEntity<ApiResponse<JwtResponse>> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
@@ -66,23 +72,26 @@ public class AuthController {
         .map(item -> item.getAuthority())
         .collect(Collectors.toList());
 
+    RefreshToken refreshToken = refreshTokenService.createRefreshToken(userDetails.getId());
+    
     JwtResponse jwtResponse = new JwtResponse(jwt, 
+                         refreshToken.getToken(),
                          userDetails.getId(), 
                          userDetails.getUsername(), 
                          userDetails.getEmail(), 
                          roles);
     
-    return ResponseUtil.success("登录成功", jwtResponse);
+    return ResponseUtil.success("login successfully", jwtResponse);
   }
 
   @PostMapping("/signup")
   public ResponseEntity<ApiResponse<Object>> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
     if (userRepository.existsByUsername(signUpRequest.getUsername())) {
-      return ResponseUtil.badRequest("用户名已被使用");
+      return ResponseUtil.badRequest("username already exists");
     }
 
     if (userRepository.existsByEmail(signUpRequest.getEmail())) {
-      return ResponseUtil.badRequest("邮箱已被使用");
+      return ResponseUtil.badRequest("email already exists");
     }
 
     // Create new user's account
@@ -123,6 +132,39 @@ public class AuthController {
     user.setRoles(roles);
     userRepository.save(user);
 
-    return ResponseUtil.success("用户注册成功");
+    return ResponseUtil.success("user registered successfully");
+  }
+
+  @PostMapping("/refreshtoken")
+  public ResponseEntity<ApiResponse<JwtResponse>> refreshtoken(@Valid @RequestBody TokenRefreshRequest request) {
+    String requestRefreshToken = request.getRefreshToken();
+
+    return refreshTokenService.findByToken(requestRefreshToken)
+        .map(refreshTokenService::verifyExpiration)
+        .map(RefreshToken::getUser)
+        .map(user -> {
+          String token = jwtUtils.generateTokenFromUsername(user.getUsername());
+          RefreshToken newRefreshToken = refreshTokenService.createRefreshToken(user.getId());
+          
+          List<String> roles = user.getRoles().stream()
+              .map(role -> role.getName().name())
+              .collect(Collectors.toList());
+          
+          JwtResponse jwtResponse = new JwtResponse(token, 
+                               newRefreshToken.getToken(),
+                               user.getId(), 
+                               user.getUsername(), 
+                               user.getEmail(), 
+                               roles);
+          
+          return ResponseUtil.success("Token refreshed successfully", jwtResponse);
+        })
+        .orElseThrow(() -> new RuntimeException("Refresh token is not in database!"));
+  }
+
+  @PostMapping("/signout")
+  public ResponseEntity<ApiResponse<Object>> logoutUser() {
+    // 这里可以添加登出逻辑，比如将token加入黑名单
+    return ResponseUtil.success("User signed out successfully");
   }
 }
