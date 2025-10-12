@@ -1,0 +1,526 @@
+{
+    "code": 0,
+    "message": "",
+    "data": {
+        "user": {
+            "id": "user_admin_id",
+            "username": "admin",
+            "avatar": "https://avatars.githubusercontent.com/u/97881742",
+            "email": "admin@slash.com",
+            "roles": [
+                {
+                    "id": "role_admin_id",
+                    "name": "admin",
+                    "code": "SUPER_ADMIN"
+                }
+            ],
+            "permissions": [
+                {
+                    "id": "permission_create",
+                    "name": "permission-create",
+                    "code": "permission:create"
+                },
+                {
+                    "id": "permission_read",
+                    "name": "permission-read",
+                    "code": "permission:read"
+                },
+                {
+                    "id": "permission_update",
+                    "name": "permission-update",
+                    "code": "permission:update"
+                },
+                {
+                    "id": "permission_delete",
+                    "name": "permission-delete",
+                    "code": "permission:delete"
+                }
+            ],
+            "menu": [
+                {
+                    "id": "group_dashboard",
+                    "name": "sys.nav.dashboard",
+                    "code": "dashboard",
+                    "parentId": "",
+                    "type": 0,
+                    "children": [
+                        {
+                            "id": "workbench",
+                            "parentId": "group_dashboard",
+                            "name": "sys.nav.workbench",
+                            "code": "workbench",
+                            "icon": "local:ic-workbench",
+                            "type": 2,
+                            "path": "/workbench",
+                            "component": "/pages/dashboard/workbench",
+                            "children": []
+                        },
+                        {
+                            "id": "analysis",
+                            "parentId": "group_dashboard",
+                            "name": "sys.nav.analysis",
+                            "code": "analysis",
+                            "icon": "local:ic-analysis",
+                            "type": 2,
+                            "path": "/analysis",
+                            "component": "/pages/dashboard/analysis",
+                            "children": []
+                        }
+                    ]
+                },
+                {
+                    "id": "group_pages",
+                    "name": "sys.nav.pages",
+                    "code": "pages",
+                    "parentId": "",
+                    "type": 0,
+                    "children": [
+                        {
+                            "id": "management",
+                            "parentId": "group_pages",
+                            "name": "sys.nav.management",
+                            "code": "management",
+                            "icon": "local:ic-management",
+                            "type": 1,
+                            "path": "/management",
+                            "children": [
+                                {
+                                    "id": "management_user",
+                                    "parentId": "management",
+                                    "name": "sys.nav.user.index",
+                                    "code": "management:user",
+                                    "type": 1,
+                                    "path": "/management/user",
+                                    "children": [
+                                        {
+                                            "id": "management_user_profile",
+                                            "parentId": "management_user",
+                                            "name": "sys.nav.user.profile",
+                                            "code": "management:user:profile",
+                                            "type": 2,
+                                            "path": "management/user/profile",
+                                            "component": "/pages/management/user/profile",
+                                            "children": []
+                                        },
+                                        {
+                                            "id": "management_user_account",
+                                            "parentId": "management_user",
+                                            "name": "sys.nav.user.account",
+                                            "code": "management:user:account",
+                                            "type": 2,
+                                            "path": "management/user/account",
+                                            "component": "/pages/management/user/account",
+                                            "children": []
+                                        }
+                                    ]
+                                },
+                                {
+                                    "id": "management_system",
+                                    "parentId": "management",
+                                    "name": "sys.nav.system.index",
+                                    "code": "management:system",
+                                    "type": 1,
+                                    "path": "management/system",
+                                    "children": [
+                                        {
+                                            "id": "management_system_user",
+                                            "parentId": "management_system",
+                                            "name": "sys.nav.system.user",
+                                            "code": "management:system:user",
+                                            "type": 2,
+                                            "path": "/management/system/user",
+                                            "component": "/pages/management/system/user",
+                                            "children": []
+                                        },
+                                        {
+                                            "id": "management_system_role",
+                                            "parentId": "management_system",
+                                            "name": "sys.nav.system.role",
+                                            "code": "management:system:role",
+                                            "type": 2,
+                                            "path": "/management/system/role",
+                                            "component": "/pages/management/system/role",
+                                            "children": []
+                                        },
+                                        {
+                                            "id": "management_system_permission",
+                                            "parentId": "management_system",
+                                            "name": "sys.nav.system.permission",
+                                            "code": "management:system:permission",
+                                            "type": 2,
+                                            "path": "/management/system/permission",
+                                            "component": "/pages/management/system/permission",
+                                            "children": []
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "id": "menulevel",
+                            "parentId": "group_pages",
+                            "name": "sys.nav.menulevel.index",
+                            "code": "menulevel",
+                            "icon": "local:ic-menulevel",
+                            "type": 1,
+                            "path": "/menu_level",
+                            "children": [
+                                {
+                                    "id": "menulevel_1a",
+                                    "parentId": "menulevel",
+                                    "name": "sys.nav.menulevel.1a",
+                                    "code": "menulevel:1a",
+                                    "type": 2,
+                                    "path": "/menu_level/1a",
+                                    "component": "/pages/menu-level/menu-level-1a",
+                                    "children": []
+                                },
+                                {
+                                    "id": "menulevel_1b",
+                                    "parentId": "menulevel",
+                                    "name": "sys.nav.menulevel.1b.index",
+                                    "code": "menulevel:1b",
+                                    "type": 1,
+                                    "path": "/menu_level/1b",
+                                    "component": "/pages/menu-level/menu-level-1b",
+                                    "children": [
+                                        {
+                                            "id": "menulevel_1b_2a",
+                                            "parentId": "menulevel_1b",
+                                            "name": "sys.nav.menulevel.1b.2a",
+                                            "code": "menulevel:1b:2a",
+                                            "type": 2,
+                                            "path": "/menu_level/1b/2a",
+                                            "component": "/pages/menu-level/menu-level-1b/menu-level-2a",
+                                            "children": []
+                                        },
+                                        {
+                                            "id": "menulevel_1b_2b",
+                                            "parentId": "menulevel_1b",
+                                            "name": "sys.nav.menulevel.1b.2b.index",
+                                            "code": "menulevel:1b:2b",
+                                            "type": 1,
+                                            "path": "/menu_level/1b/2b",
+                                            "children": [
+                                                {
+                                                    "id": "menulevel_1b_2b_3a",
+                                                    "parentId": "menulevel_1b_2b",
+                                                    "name": "sys.nav.menulevel.1b.2b.3a",
+                                                    "code": "menulevel:1b:2b:3a",
+                                                    "type": 2,
+                                                    "path": "/menu_level/1b/2b/3a",
+                                                    "component": "/pages/menu-level/menu-level-1b/menu-level-2b/menu-level-3a",
+                                                    "children": []
+                                                },
+                                                {
+                                                    "id": "menulevel_1b_2b_3b",
+                                                    "parentId": "menulevel_1b_2b",
+                                                    "name": "sys.nav.menulevel.1b.2b.3b",
+                                                    "code": "menulevel:1b:2b:3b",
+                                                    "type": 2,
+                                                    "path": "/menu_level/1b/2b/3b",
+                                                    "component": "/pages/menu-level/menu-level-1b/menu-level-2b/menu-level-3b",
+                                                    "children": []
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "id": "error",
+                            "parentId": "group_pages",
+                            "name": "sys.nav.error.index",
+                            "code": "error",
+                            "icon": "bxs:error-alt",
+                            "type": 1,
+                            "path": "/error",
+                            "children": [
+                                {
+                                    "id": "error_403",
+                                    "parentId": "error",
+                                    "name": "sys.nav.error.403",
+                                    "code": "error:403",
+                                    "type": 2,
+                                    "path": "/error/403",
+                                    "component": "/pages/sys/error/Page403",
+                                    "children": []
+                                },
+                                {
+                                    "id": "error_404",
+                                    "parentId": "error",
+                                    "name": "sys.nav.error.404",
+                                    "code": "error:404",
+                                    "type": 2,
+                                    "path": "/error/404",
+                                    "component": "/pages/sys/error/Page404",
+                                    "children": []
+                                },
+                                {
+                                    "id": "error_500",
+                                    "parentId": "error",
+                                    "name": "sys.nav.error.500",
+                                    "code": "error:500",
+                                    "type": 2,
+                                    "path": "/error/500",
+                                    "component": "/pages/sys/error/Page500",
+                                    "children": []
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": "group_ui",
+                    "name": "sys.nav.ui",
+                    "code": "ui",
+                    "parentId": "",
+                    "type": 0,
+                    "children": [
+                        {
+                            "id": "components",
+                            "parentId": "group_ui",
+                            "name": "sys.nav.components",
+                            "code": "components",
+                            "icon": "solar:widget-5-bold-duotone",
+                            "type": 1,
+                            "path": "/components",
+                            "caption": "sys.nav.custom_ui_components",
+                            "children": [
+                                {
+                                    "id": "components_icon",
+                                    "parentId": "components",
+                                    "name": "sys.nav.icon",
+                                    "code": "components:icon",
+                                    "type": 2,
+                                    "path": "/components/icon",
+                                    "component": "/pages/components/icon",
+                                    "children": []
+                                },
+                                {
+                                    "id": "components_animate",
+                                    "parentId": "components",
+                                    "name": "sys.nav.animate",
+                                    "code": "components:animate",
+                                    "type": 2,
+                                    "path": "/components/animate",
+                                    "component": "/pages/components/animate",
+                                    "children": []
+                                },
+                                {
+                                    "id": "components_scroll",
+                                    "parentId": "components",
+                                    "name": "sys.nav.scroll",
+                                    "code": "components:scroll",
+                                    "type": 2,
+                                    "path": "/components/scroll",
+                                    "component": "/pages/components/scroll",
+                                    "children": []
+                                },
+                                {
+                                    "id": "components_i18n",
+                                    "parentId": "components",
+                                    "name": "sys.nav.i18n",
+                                    "code": "components:i18n",
+                                    "type": 2,
+                                    "path": "/components/multi-language",
+                                    "component": "/pages/components/multi-language",
+                                    "children": []
+                                },
+                                {
+                                    "id": "components_upload",
+                                    "parentId": "components",
+                                    "name": "sys.nav.upload",
+                                    "code": "components:upload",
+                                    "type": 2,
+                                    "path": "/components/upload",
+                                    "component": "/pages/components/upload",
+                                    "children": []
+                                },
+                                {
+                                    "id": "components_chart",
+                                    "parentId": "components",
+                                    "name": "sys.nav.chart",
+                                    "code": "components:chart",
+                                    "type": 2,
+                                    "path": "/components/chart",
+                                    "component": "/pages/components/chart",
+                                    "children": []
+                                },
+                                {
+                                    "id": "components_toast",
+                                    "parentId": "components",
+                                    "name": "sys.nav.toast",
+                                    "code": "components:toast",
+                                    "type": 2,
+                                    "path": "/components/toast",
+                                    "component": "/pages/components/toast",
+                                    "children": []
+                                }
+                            ]
+                        },
+                        {
+                            "id": "functions",
+                            "parentId": "group_ui",
+                            "name": "sys.nav.functions",
+                            "code": "functions",
+                            "icon": "solar:plain-2-bold-duotone",
+                            "type": 1,
+                            "path": "/functions",
+                            "children": [
+                                {
+                                    "id": "functions_clipboard",
+                                    "parentId": "functions",
+                                    "name": "sys.nav.clipboard",
+                                    "code": "functions:clipboard",
+                                    "type": 2,
+                                    "path": "/functions/clipboard",
+                                    "component": "/pages/functions/clipboard",
+                                    "children": []
+                                },
+                                {
+                                    "id": "functions_tokenExpired",
+                                    "parentId": "functions",
+                                    "name": "sys.nav.token_expired",
+                                    "code": "functions:token_expired",
+                                    "type": 2,
+                                    "path": "/functions/token_expired",
+                                    "component": "/pages/functions/token-expired",
+                                    "children": []
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": "group_others",
+                    "name": "sys.nav.others",
+                    "code": "others",
+                    "parentId": "",
+                    "type": 0,
+                    "children": [
+                        {
+                            "id": "permission",
+                            "parentId": "group_others",
+                            "name": "sys.nav.permission",
+                            "code": "permission",
+                            "icon": "mingcute:safe-lock-fill",
+                            "type": 2,
+                            "path": "/permission",
+                            "component": "/pages/sys/others/permission",
+                            "children": []
+                        },
+                        {
+                            "id": "permission_page_test",
+                            "parentId": "group_others",
+                            "name": "sys.nav.permission.page_test",
+                            "code": "permission:page_test",
+                            "icon": "mingcute:safe-lock-fill",
+                            "type": 2,
+                            "path": "/permission/page-test",
+                            "component": "/pages/sys/others/permission/page-test",
+                            "auth": [
+                                "permission:read"
+                            ],
+                            "hidden": true,
+                            "children": []
+                        },
+                        {
+                            "id": "calendar",
+                            "parentId": "group_others",
+                            "name": "sys.nav.calendar",
+                            "code": "calendar",
+                            "icon": "solar:calendar-bold-duotone",
+                            "type": 2,
+                            "path": "/calendar",
+                            "info": "12",
+                            "component": "/pages/sys/others/calendar",
+                            "children": []
+                        },
+                        {
+                            "id": "kanban",
+                            "parentId": "group_others",
+                            "name": "sys.nav.kanban",
+                            "code": "kanban",
+                            "icon": "solar:clipboard-bold-duotone",
+                            "type": 2,
+                            "path": "/kanban",
+                            "component": "/pages/sys/others/kanban",
+                            "children": []
+                        },
+                        {
+                            "id": "disabled",
+                            "parentId": "group_others",
+                            "name": "sys.nav.disabled",
+                            "code": "disabled",
+                            "icon": "local:ic-disabled",
+                            "type": 2,
+                            "path": "/disabled",
+                            "disabled": true,
+                            "component": "/pages/sys/others/disabled",
+                            "children": []
+                        },
+                        {
+                            "id": "label",
+                            "parentId": "group_others",
+                            "name": "sys.nav.label",
+                            "code": "label",
+                            "icon": "local:ic-label",
+                            "type": 2,
+                            "path": "#label",
+                            "info": "New",
+                            "children": []
+                        },
+                        {
+                            "id": "link",
+                            "parentId": "group_others",
+                            "name": "sys.nav.link",
+                            "code": "link",
+                            "icon": "local:ic-external",
+                            "type": 1,
+                            "path": "/link",
+                            "children": [
+                                {
+                                    "id": "link_external",
+                                    "parentId": "link",
+                                    "name": "sys.nav.external_link",
+                                    "code": "link:external_link",
+                                    "type": 2,
+                                    "path": "/link/external_link",
+                                    "component": "/pages/sys/others/link/external-link",
+                                    "externalLink": "https://ant.design/index-cn",
+                                    "children": []
+                                },
+                                {
+                                    "id": "link_iframe",
+                                    "parentId": "link",
+                                    "name": "sys.nav.iframe",
+                                    "code": "link:iframe",
+                                    "type": 2,
+                                    "path": "/link/iframe",
+                                    "externalLink": "https://ant.design/index-cn",
+                                    "component": "/pages/sys/others/link/iframe",
+                                    "children": []
+                                }
+                            ]
+                        },
+                        {
+                            "id": "blank",
+                            "parentId": "group_others",
+                            "name": "sys.nav.blank",
+                            "code": "blank",
+                            "icon": "local:ic-blank",
+                            "type": 2,
+                            "path": "/blank",
+                            "component": "/pages/sys/others/blank",
+                            "children": []
+                        }
+                    ]
+                }
+            ]
+        },
+        "accessToken": "62370e18-9ff9-4a25-b925-79392040ef65",
+        "refreshToken": "dcf90c87-3818-4e1d-9aae-26c21fc71955"
+    }
+}

@@ -31,6 +31,21 @@ public class User {
   @NotBlank
   @Size(max = 120)
   private String password;
+  
+  @Column(name = "avatar")
+  private String avatar;
+  
+  @Column(name = "nickname")
+  private String nickname;
+  
+  @Column(name = "phone")
+  private String phone;
+  
+  @Column(name = "is_active")
+  private Boolean isActive = true;
+  
+  @Column(name = "last_login_time")
+  private java.time.LocalDateTime lastLoginTime;
 
   @ManyToMany(fetch = FetchType.LAZY)
   @JoinTable(  name = "user_roles", 
@@ -85,5 +100,45 @@ public class User {
 
   public void setRoles(Set<Role> roles) {
     this.roles = roles;
+  }
+  
+  public String getAvatar() {
+    return avatar;
+  }
+  
+  public void setAvatar(String avatar) {
+    this.avatar = avatar;
+  }
+  
+  public String getNickname() {
+    return nickname;
+  }
+  
+  public void setNickname(String nickname) {
+    this.nickname = nickname;
+  }
+  
+  public String getPhone() {
+    return phone;
+  }
+  
+  public void setPhone(String phone) {
+    this.phone = phone;
+  }
+  
+  public Boolean getIsActive() {
+    return isActive;
+  }
+  
+  public void setIsActive(Boolean isActive) {
+    this.isActive = isActive;
+  }
+  
+  public java.time.LocalDateTime getLastLoginTime() {
+    return lastLoginTime;
+  }
+  
+  public void setLastLoginTime(java.time.LocalDateTime lastLoginTime) {
+    this.lastLoginTime = lastLoginTime;
   }
 }

@@ -1,9 +1,7 @@
 package com.bezkoder.springjwt.controllers;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import jakarta.validation.Valid;
 
@@ -34,7 +32,9 @@ import com.bezkoder.springjwt.repository.UserRepository;
 import com.bezkoder.springjwt.security.jwt.JwtUtils;
 import com.bezkoder.springjwt.security.services.UserDetailsImpl;
 import com.bezkoder.springjwt.security.services.RefreshTokenService;
+import com.bezkoder.springjwt.security.services.UserInfoService;
 import com.bezkoder.springjwt.models.RefreshToken;
+import com.bezkoder.springjwt.payload.response.UserInfo;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -58,6 +58,9 @@ public class AuthController {
   @Autowired
   RefreshTokenService refreshTokenService;
 
+  @Autowired
+  UserInfoService userInfoService;
+
   @PostMapping("/signin")
   public ResponseEntity<ApiResponse<JwtResponse>> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
@@ -67,19 +70,14 @@ public class AuthController {
     SecurityContextHolder.getContext().setAuthentication(authentication);
     String jwt = jwtUtils.generateJwtToken(authentication);
     
-    UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();    
-    List<String> roles = userDetails.getAuthorities().stream()
-        .map(item -> item.getAuthority())
-        .collect(Collectors.toList());
-
+    UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+    
     RefreshToken refreshToken = refreshTokenService.createRefreshToken(userDetails.getId());
     
-    JwtResponse jwtResponse = new JwtResponse(jwt, 
-                         refreshToken.getToken(),
-                         userDetails.getId(), 
-                         userDetails.getUsername(), 
-                         userDetails.getEmail(), 
-                         roles);
+    // 获取完整的用户信息
+    UserInfo userInfo = userInfoService.getUserInfo(userDetails.getId());
+    
+    JwtResponse jwtResponse = new JwtResponse(jwt, refreshToken.getToken(), userInfo);
     
     return ResponseUtil.success("login successfully", jwtResponse);
   }
@@ -146,16 +144,10 @@ public class AuthController {
           String token = jwtUtils.generateTokenFromUsername(user.getUsername());
           RefreshToken newRefreshToken = refreshTokenService.createRefreshToken(user.getId());
           
-          List<String> roles = user.getRoles().stream()
-              .map(role -> role.getName().name())
-              .collect(Collectors.toList());
+          // 获取完整的用户信息
+          UserInfo userInfo = userInfoService.getUserInfo(user.getId());
           
-          JwtResponse jwtResponse = new JwtResponse(token, 
-                               newRefreshToken.getToken(),
-                               user.getId(), 
-                               user.getUsername(), 
-                               user.getEmail(), 
-                               roles);
+          JwtResponse jwtResponse = new JwtResponse(token, newRefreshToken.getToken(), userInfo);
           
           return ResponseUtil.success("Token refreshed successfully", jwtResponse);
         })
