@@ -6,7 +6,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 > 💡 一个轻量、模块化、可拓展的 Spring Boot 后端脚手架  
-> 🚀 与 [bee-react-admin](https://github.com/yi-echo/bee-react-admin) 前端模板完美配合，快速搭建企业级后台管理系统。
+> 🚀 与 [bee-react-admin](https://github.com/yi-echo/bee-react-admin) 前端模板完美配合， 面向 ** 前后端学习者 / 个人开发者**，帮助你快速掌握前后端分离项目的完整开发流程。
 
 ---
 
